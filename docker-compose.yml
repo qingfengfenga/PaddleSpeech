@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  chatglm:
+  paddlespeech:
     build: .
     image: paddlespeech:gpu
     container_name: paddlespeech
