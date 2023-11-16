@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  chatglm:
+    build: .
+    image: paddlespeech:gpu
+    container_name: paddlespeech
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./models:/root/.paddlespeech/models:cached
+      - ./paddlenlp:/root/.paddlenlp:cached
+    environment:
+      - CLI_ARGS=paddlespeech_server start --config_file ./demos/speech_server/conf/application.yaml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
